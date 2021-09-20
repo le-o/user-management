@@ -86,7 +86,10 @@ $this->params['breadcrumbs'][] = $this->title;
 						'format'=>'raw',
 					],
                     [
-                        'attribute' => 'qualification',
+                        'attribute' => 'surname',
+                    ],
+                    [
+                        'attribute' => 'name',
                     ],
 					[
 						'attribute'=>'gridRoleSearch',
@@ -108,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					[
 						'value'=>function(User $model){
 								return GhostHtml::a(
-									UserManagementModule::t('back', 'Roles and permissions'),
+									UserManagementModule::t('back', 'Roles'),
 									['/user-management/user-permission/set', 'id'=>$model->id],
 									['class'=>'btn btn-sm btn-primary', 'data-pjax'=>0]);
 							},
@@ -121,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					[
 						'value'=>function(User $model){
 								return GhostHtml::a(
-									UserManagementModule::t('back', 'Change password'),
+									UserManagementModule::t('back', 'Change pwd'),
 									['change-password', 'id'=>$model->id],
 									['class'=>'btn btn-sm btn-default', 'data-pjax'=>0]);
 							},
