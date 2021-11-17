@@ -2,6 +2,7 @@
 
 namespace leo\modules\UserManagement\models;
 
+use app\models\PowParameters;
 use webvimark\helpers\LittleBigHelper;
 use webvimark\helpers\Singleton;
 use leo\modules\UserManagement\components\AuthHelper;
@@ -29,6 +30,8 @@ use yii\behaviors\TimestampBehavior;
  * @property integer $qualification
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property PowParameters $fkQualification
  */
 class User extends UserIdentity
 {
@@ -258,7 +261,7 @@ class User extends UserIdentity
 			['email', 'email'],
 			['email', 'validateEmailConfirmedUnique'],
 
-            ['qualification', 'string'],
+            ['qualification', 'integer'],
 
 			['bind_to_ip', 'validateBindToIp'],
 			['bind_to_ip', 'trim'],
@@ -425,9 +428,12 @@ class User extends UserIdentity
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getQualification()
+    public function getFkQualification()
     {
-        return $this->qualification;
+        if (is_null($this->qualification)) {
+            return new \app\models\PowParameters;
+        }
+        return $this->hasOne(\app\models\PowParameters::class, ['parameter_id' => 'qualification']);
     }
 
     /**
@@ -435,6 +441,6 @@ class User extends UserIdentity
      */
     public function getDisplayname()
     {
-        return $this->username;
+        return ($this->surname == '') ? $this->username : $this->surname.' '.$this->name;
     }
 }

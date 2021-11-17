@@ -183,4 +183,15 @@ abstract class UserIdentity extends ActiveRecord implements IdentityInterface
 	{
 		$this->confirmation_token = null;
 	}
+
+    // Only for REST api
+    public function fields()
+    {
+        $fields = parent::fields();
+
+        // remove fields that contain sensitive information
+        unset($fields['auth_key'], $fields['password_hash'], $fields['confirmation_token'], $fields['registration_ip']);
+
+        return $fields;
+    }
 }

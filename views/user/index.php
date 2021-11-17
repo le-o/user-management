@@ -85,12 +85,9 @@ $this->params['breadcrumbs'][] = $this->title;
 							},
 						'format'=>'raw',
 					],
-                    [
-                        'attribute' => 'surname',
-                    ],
-                    [
-                        'attribute' => 'name',
-                    ],
+                    'surname',
+                    'name',
+                    'fkQualification.name',
 					[
 						'attribute'=>'gridRoleSearch',
 						'filter'=>ArrayHelper::map(Role::getAvailableRoles(Yii::$app->user->isSuperAdmin),'name', 'description'),
