@@ -23,11 +23,11 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 
         <?= $form->field($model->loadDefaultValues(), 'status')->dropDownList(User::getStatusList()) ?>
 
-        <?= $form->field($model, 'qualification')->dropDownList((new \app\models\PowParameters)->optsQualification(), ['prompt'=>Yii::t('app', 'Choose a qualification')]) ?>
+        <?= $form->field($model, 'pow_qualification')->dropDownList((new \app\models\PowParameters)->optsQualification(), ['prompt'=>Yii::t('app', 'Choose a qualification')]) ?>
 
-        <?= $form->field($model, 'surname')->textInput(['maxlength' => 255, 'autocomplete'=>'off']) ?>
+        <?= $form->field($model, 'pow_surname')->textInput(['maxlength' => 255, 'autocomplete'=>'off']) ?>
 
-        <?= $form->field($model, 'name')->textInput(['maxlength' => 255, 'autocomplete'=>'off']) ?>
+        <?= $form->field($model, 'pow_name')->textInput(['maxlength' => 255, 'autocomplete'=>'off']) ?>
 
         <?= $form->field($model, 'email')->textInput(['maxlength' => 255, 'autocomplete'=>'off']) ?>
 

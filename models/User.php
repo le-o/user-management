@@ -27,9 +27,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $registration_ip
  * @property integer $status
  * @property integer $superadmin
- * @property integer $qualification
- * @property string $name
- * @property string $surname
+ * @property integer $pow_qualification
+ * @property string $pow_name
+ * @property string $pow_surname
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -263,13 +263,13 @@ class User extends UserIdentity
             ['email', 'email'],
             ['email', 'validateEmailConfirmedUnique'],
 
-            ['qualification', 'integer'],
+            ['pow_qualification', 'integer'],
 
-            ['name', 'string', 'max' => 50],
-            ['name', 'trim'],
+            ['pow_name', 'string', 'max' => 50],
+            ['pow_name', 'trim'],
 
-            ['surname', 'string', 'max' => 50],
-            ['surname', 'trim'],
+            ['pow_surname', 'string', 'max' => 50],
+            ['pow_surname', 'trim'],
 
             ['bind_to_ip', 'validateBindToIp'],
             ['bind_to_ip', 'trim'],
@@ -343,9 +343,9 @@ class User extends UserIdentity
             'repeat_password'    => UserManagementModule::t('back', 'Repeat password'),
             'email_confirmed'    => UserManagementModule::t('back', 'E-mail confirmed'),
             'email'              => UserManagementModule::t('back', 'E-mail'),
-            'qualification'      => UserManagementModule::t('back', 'Qualification'),
-            'name'               => UserManagementModule::t('back', 'Name'),
-            'surname'            => UserManagementModule::t('back', 'Surname'),
+            'pow_qualification'      => UserManagementModule::t('back', 'Qualification'),
+            'pow_name'               => UserManagementModule::t('back', 'Name'),
+            'pow_surname'            => UserManagementModule::t('back', 'Surname'),
         ];
     }
 
@@ -440,7 +440,7 @@ class User extends UserIdentity
      */
     public function getFkQualification()
     {
-        if (is_null($this->qualification)) {
+        if (is_null($this->pow_qualification)) {
             return new \app\models\PowParameters;
         }
         return $this->hasOne(\app\models\PowParameters::class, ['parameter_id' => 'qualification']);
@@ -451,6 +451,27 @@ class User extends UserIdentity
      */
     public function getDisplayname()
     {
-        return ($this->surname == '') ? $this->username : $this->surname . ' ' . $this->name;
+        return ($this->pow_surname == '') ? $this->username : $this->pow_surname . ' ' . $this->pow_name;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getSurname() {
+        return $this->pow_surname;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getName() {
+        return $this->pow_name;
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function getQualification() {
+        return $this->pow_qualification;
     }
 }
