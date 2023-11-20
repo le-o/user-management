@@ -43,7 +43,8 @@ class UserSearch extends User
 				'pageSize' => Yii::$app->request->cookies->getValue('_grid_page_size', 20),
 			],
 			'sort'=>[
-				'defaultOrder'=>[
+				'defaultOrder'=> [
+                    'status'=>SORT_DESC,
 					'id'=>SORT_DESC,
 				],
 			],
