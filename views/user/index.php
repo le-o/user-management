@@ -1,9 +1,9 @@
 <?php
 
-use leo\modules\UserManagement\components\GhostHtml;
-use leo\modules\UserManagement\models\rbacDB\Role;
-use leo\modules\UserManagement\models\User;
-use leo\modules\UserManagement\UserManagementModule;
+use webvimark\modules\UserManagement\components\GhostHtml;
+use webvimark\modules\UserManagement\models\rbacDB\Role;
+use webvimark\modules\UserManagement\models\User;
+use webvimark\modules\UserManagement\UserManagementModule;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -15,7 +15,7 @@ use yii\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var leo\modules\UserManagement\models\search\UserSearch $searchModel
+ * @var webvimark\modules\UserManagement\models\search\UserSearch $searchModel
  */
 
 $this->title = UserManagementModule::t('back', 'Users');
@@ -85,9 +85,16 @@ $this->params['breadcrumbs'][] = $this->title;
 							},
 						'format'=>'raw',
 					],
-                    'surname',
-                    'name',
-                    'fkQualification.name',
+					[
+						'attribute'=>'email',
+						'format'=>'raw',
+						'visible'=>User::hasPermission('viewUserEmail'),
+					],
+					[
+						'class'=>'leo\components\StatusColumn',
+						'attribute'=>'email_confirmed',
+						'visible'=>User::hasPermission('viewUserEmail'),
+					],
 					[
 						'attribute'=>'gridRoleSearch',
 						'filter'=>ArrayHelper::map(Role::getAvailableRoles(Yii::$app->user->isSuperAdmin),'name', 'description'),
@@ -121,7 +128,7 @@ $this->params['breadcrumbs'][] = $this->title;
 					[
 						'value'=>function(User $model){
 								return GhostHtml::a(
-									UserManagementModule::t('back', 'Change pwd'),
+									UserManagementModule::t('back', 'Change password'),
 									['change-password', 'id'=>$model->id],
 									['class'=>'btn btn-sm btn-default', 'data-pjax'=>0]);
 							},
