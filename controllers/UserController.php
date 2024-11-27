@@ -30,13 +30,10 @@ class UserController extends AdminDefaultController
 	{
 		$model = new User(['scenario'=>'newUser']);
 
-        if ( $model->load(Yii::$app->request->post())) {
-            $model->username = $model->email;
-
-            if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        }
+		if ( $model->load(Yii::$app->request->post()) && $model->save() )
+		{
+			return $this->redirect(['view',	'id' => $model->id]);
+		}
 
 		return $this->renderIsAjax('create', compact('model'));
 	}
@@ -53,16 +50,15 @@ class UserController extends AdminDefaultController
     {
         $model = $this->findModel($id);
 
-        if ( $this->scenarioOnUpdate ) {
+        if ( $this->scenarioOnUpdate )
+        {
             $model->scenario = $this->scenarioOnUpdate;
         }
 
-        if ( $model->load(Yii::$app->request->post())) {
-            $model->username = $model->email;
+        if ( $model->load(Yii::$app->request->post()) AND $model->save())
+        {
+            $redirect = $this->getRedirectPage('update', $model);
 
-            if ($model->save()) {
-                $redirect = $this->getRedirectPage('update', $model);
-            }
             return $redirect === false ? '' : $this->redirect($redirect);
         }
 

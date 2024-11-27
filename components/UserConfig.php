@@ -52,9 +52,9 @@ class UserConfig extends User
     /**
      * @return string
      */
-    public function getDisplayname()
+    public function getFkpersonne()
     {
-        return @Yii::$app->user->identity->username;
+        return @Yii::$app->user->identity->fk_personne;
     }
 
 	/**
