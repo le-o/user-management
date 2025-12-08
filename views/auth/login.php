@@ -11,6 +11,16 @@ use yii\helpers\Html;
 ?>
 
 <div class="container" id="login-wrapper">
+    <?php if (isset(Yii::$app->params['loginBrand'])) { ?>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                <?= Yii::$app->params['loginBrand']; ?>
+                <br />
+                <br />
+            </div>
+        </div>
+    <?php } ?>
+
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="panel panel-default">
