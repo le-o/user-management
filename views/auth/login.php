@@ -88,7 +88,7 @@ html, body {
 }
 #login-wrapper {
 	position: relative;
-	top: 30%;
+	top: 20%;
 }
 #login-wrapper .registration-block {
 	margin-top: 15px;
